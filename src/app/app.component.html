@@ -1,0 +1,84 @@
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#"></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+    </div>
+    <div class="col-sm-8 text-left"> 
+      <h1>Temperature Converter</h1>
+      <hr>
+      <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="form-group mb-3">
+          <select id="inputType" name="inputType" class="form-select form-select" aria-label=".form-select" [(ngModel)]="converterData.inputType">
+            <option selected>FROM select temperature type </option>
+            <option value="C">Celcius</option>
+            <option value="K">Kevin</option>
+            <option value="F">Farenheit</option>
+          </select>
+          <div [hidden]="!form.submitted || converterData.inputType.length == 1" class="alert alert-danger" name="selectTemperature">
+            Please select the temperature type to convert!
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <select id="outputType" name="outputType" class="form-select form-select" aria-label=".form-select" [(ngModel)]="converterData.outputType" #propertyTest>
+            <option selected>TO Select temperature type</option>
+            <option value="C">Celcius</option>
+            <option value="K">Kevin</option>
+            <option value="F">Farenheit</option>
+          </select>
+          <div [hidden]="!form.submitted || converterData.outputType.length == 1" class="alert alert-danger" name="selectTemperature">
+            Please select the temperature type to convert!
+          </div>
+          <div [hidden]="!form.submitted || form.valid || converterData.outputType != converterData.inputType" class="alert alert-danger" name="sameTemperatureAlert">
+            Please select a different temperature Type to convert!
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Temperature value:</span>
+          <input id="inputValue" name="inputValue" type="number" class="form-control" placeholder="0.0" aria-label="input" aria-describedby="basic-addon1" 
+          [(ngModel)]="converterData.inputValue" required #nameField="ngModel"
+          [class.field-error]="form.submitted && nameField.invalid" required>
+          <div [hidden]="!form.submitted || nameField.valid" class="alert alert-danger">
+            Enter the temperature value to convert
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Temperature Result:</span> 
+          <input readonly id="outputValue" name="outputValue" type="number" class="form-control readonly" placeholder="0.0" aria-label="output" aria-describedby="basic-addon1" [(ngModel)]="converterData.outputValue">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Convert</button>
+        </div>  
+    </form>
+
+  </div>
+    <div class="col-sm-2 sidenav">
+      <div class="well">
+      </div>
+      <div class="well">
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>Developer: Joel Dela Vega</p>
+</footer>
